@@ -3,7 +3,7 @@ require 'net/http'
 
 module StockHelper
   class StockPrice
-    def allPrice
+    def all_price
       url = URI.parse("#{RAPID_API_BASE_URL}/any")
 
       http = Net::HTTP.new(url.host, url.port)
