@@ -6,6 +6,12 @@ class UserSeeder
         email: "alice@gmail.com", 
         salt: "abcdef", 
         password: BCrypt::Password.create("mysecretpassabcdef"),
+      },
+      {
+        name: "Bob", 
+        email: "bob@gmail.com", 
+        salt: "abcdef", 
+        password: BCrypt::Password.create("mysecretpassabcdef"),
       }
     ])
   end
