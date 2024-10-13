@@ -13,7 +13,7 @@ module JwtHelper
 
       # Check if the signature with the newly created is match
       if exp_encoded_sig != encoded_signature
-        return {'error': "invalid signature"} 
+        return {error: "invalid signature"}
       end
 
       decoded_header = Base64.urlsafe_decode64(encoded_header)
@@ -23,19 +23,19 @@ module JwtHelper
       payload = JSON.parse(decoded_payload)
 
       unless header.key?("account")
-        return {'error': 'account is not present'}
+        return {error: 'account is not present'}
       end
 
       if header['account'] != JWT_ACCOUNT
-        return {'error': 'invalid account'}
+        return {error: 'invalid account'}
       end
 
       unless header.key?("exp")
-        return {'error': "key expired is not present"} 
+        return {error: "key expired is not present"}
       end
 
       if header['exp'] < Time.now.to_i
-        return {'error': 'token is expired'}
+        return {error: 'token is expired'}
       end
 
       {data: payload}
