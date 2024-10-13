@@ -9,7 +9,7 @@ module JwtHelper
       encoded_header, encoded_payload, encoded_signature = jwt.split('.')
 
       exp_sig = OpenSSL::HMAC.digest('SHA256', JWT_SECRET_KEY, "#{encoded_header}.#{encoded_payload}")
-      exp_encoded_sig = Base64.urlsafe_encode64(exp_sig)
+      exp_encoded_sig = Base64.urlsafe_encode64(exp_sig, padding: false)
 
       # Check if the signature with the newly created is match
       if exp_encoded_sig != encoded_signature
@@ -22,7 +22,7 @@ module JwtHelper
       header = JSON.parse(decoded_header)
       payload = JSON.parse(decoded_payload)
 
-      unless header.key?(:account)
+      unless header.key?("account")
         return {'error': 'account is not present'}
       end
 
@@ -30,12 +30,12 @@ module JwtHelper
         return {'error': 'invalid account'}
       end
 
-      unless header.key?(:exp)
+      unless header.key?("exp")
         return {'error': "key expired is not present"} 
       end
 
       if header['exp'] < Time.now.to_i
-        return nil, 'token is expired'
+        return {'error': 'token is expired'}
       end
 
       {data: payload}
