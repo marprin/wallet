@@ -4,7 +4,6 @@ class LoginController < ApplicationController
   def login
     body = params.require(:login).permit(:email, :password)
     _email = "#{body['email']}".downcase
-    puts _email
 
     @user = User.find_by(email: _email)
     unless @user
