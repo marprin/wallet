@@ -4,12 +4,12 @@ require 'json'
 require 'openssl'
 
 module JwtHelper
-  class JWT
-    def validate(jwt, secret)
+  class Jwt
+    def self.validate(jwt, secret)
       encoded_header, encoded_payload, encoded_signature = jwt.split('.')
 
       exp_sig = OpenSSL::HMAC.digest('SHA256', JWT_SECRET_KEY, "#{encoded_header}.#{encoded_payload}")
-      exp_encoded_sig = Base64.url_safe_encode64(exp_sig)
+      exp_encoded_sig = Base64.urlsafe_encode64(exp_sig)
 
       # Check if the signature with the newly created is match
       if exp_encoded_sig != encoded_signature
@@ -41,20 +41,21 @@ module JwtHelper
       {data: payload}
     end
 
-    def generate(payload, ttl)
+    def self.generate(payload, ttl)
+      unix_now = Time.now.to_i
       header = {
         alg: 'HS256',
         typ: 'JWT',
         account: JWT_ACCOUNT,
-        iat: Time.now.to_i,
-        exp: (Time.now + ttl).to_i
+        iat: unix_now,
+        exp: unix_now + ttl.to_i
       }
 
-      encoded_header = Base64.url_safe_encode64(header.to_json)
-      encoded_payload = Base64.url_safe_encode64(payload.to_json)
+      encoded_header = Base64.urlsafe_encode64(header.to_json, padding: false)
+      encoded_payload = Base64.urlsafe_encode64(payload.to_json, padding: false)
 
       signature = OpenSSL::HMAC.digest('SHA256', JWT_SECRET_KEY, "#{encoded_header}.#{encoded_payload}")
-      encoded_signature = Base64.url_safe_encode64(signature)
+      encoded_signature = Base64.urlsafe_encode64(signature, padding: false)
 
       "#{encoded_header}.#{encoded_payload}.#{encoded_signature}"
     end
