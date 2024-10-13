@@ -23,6 +23,6 @@ class LoginController < ApplicationController
 
     token = JwtHelper::Jwt.generate(payload, JWT_EXPIRATION)
 
-    render json: {"token": token}
+    render json: {"token": token}, status: :ok
   end
 end
