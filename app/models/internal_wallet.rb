@@ -1,0 +1,2 @@
+class InternalWallet < UserWallet
+end
