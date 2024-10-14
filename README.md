@@ -1,24 +1,41 @@
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
 * Ruby version
+3.3.5
 
 * System dependencies
+sqlite3
 
 * Configuration
-
-* Database creation
+copy `.env.erb` to `.env`
 
 * Database initialization
+run `rails db:migrate`
 
-* How to run the test suite
+* Database Seeder
+run `rails db:seed`
 
-* Services (job queues, cache servers, search engines, etc.)
+* Run the service
+```cmd
+rails server
+```
 
-* Deployment instructions
+# Endpoints
+* Login
+Path: /login
+Method: POST
+Body:
+{
+    "email": "alice@gmail.com",
+    "password": "mysecretpass"
+}
 
-* ...
+
+* Transactions
+Path: /transactions
+Method: POST
+Body:
+{
+    "amount": 5.0,
+    "from_id": 2,
+    "to_id": 3
+}
