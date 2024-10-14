@@ -1,8 +1,8 @@
 class CreateTransactions < ActiveRecord::Migration[7.2]
   def change
     create_table :transactions do |t|
-      t.references :from_id, null: false
-      t.references :to_id, null: false
+      t.references :from, null: false
+      t.references :to, null: false
       t.decimal :amount, precision: 12, scale: 2
 
       t.timestamps
