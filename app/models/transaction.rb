@@ -1,6 +1,7 @@
 class Transaction < ApplicationRecord
   TRX_TYPE_WITHDRAWAL = 1
   TRX_TYPE_DEPOSIT = 2
+  TRX_TYPE_TRANSFER = 3
 
   STATUS_FAIL = 1
   STATUS_DONE = 2
@@ -9,6 +10,6 @@ class Transaction < ApplicationRecord
   validates :status, presence: true
   validates :trx_type, presence: true
 
-  belongs_to :from_id, class_name: 'UserWallet'
-  belongs_to :to_id, class_name: 'UserWallet'
+  belongs_to :user_wallet, foreign_key: 'from_id'
+  belongs_to :user_wallet, foreign_key: 'to_id'
 end
