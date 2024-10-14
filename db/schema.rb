@@ -15,6 +15,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_14_004211) do
     t.integer "from_id", null: false
     t.integer "to_id", null: false
     t.decimal "amount", precision: 12, scale: 2
+    t.integer "status"
+    t.integer "trx_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["from_id"], name: "index_transactions_on_from_id"

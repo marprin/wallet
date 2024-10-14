@@ -4,6 +4,8 @@ class CreateTransactions < ActiveRecord::Migration[7.2]
       t.references :from, null: false
       t.references :to, null: false
       t.decimal :amount, precision: 12, scale: 2
+      t.integer :status
+      t.integer :trx_type
 
       t.timestamps
     end
