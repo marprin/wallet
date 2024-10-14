@@ -9,5 +9,7 @@
 #   end
 
 require_relative './seeds/users_seeder'
+require_relative './seeds/user_wallets_seeder'
 
 UserSeeder.seed
+UserWalletSeeder.seed
