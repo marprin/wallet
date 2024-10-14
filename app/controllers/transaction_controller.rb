@@ -3,7 +3,6 @@ class TransactionController < ApplicationController
 
   def create
     body = params.require(:transaction).permit(:amount, :from_id, :to_id)
-    puts body
     transfer_amount = body['amount']
     from_id = body['from_id']
     to_id = body['to_id']
