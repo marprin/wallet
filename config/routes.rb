@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   post 'login', to: 'login#login'
+
+  # transaction routes
+  post 'transactions', to: 'transaction#create'
 end
