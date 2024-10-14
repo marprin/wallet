@@ -20,22 +20,26 @@ rails server
 ```
 
 # Endpoints
-* Login
-Path: /login
-Method: POST
-Body:
+* Login  
+Path: /login  
+Method: POST  
+Body:  
+```
 {
     "email": "alice@gmail.com",
     "password": "mysecretpass"
 }
+```
 
 
-* Transactions
-Path: /transactions
-Method: POST
-Body:
+* Transactions  
+Path: /transactions  
+Method: POST  
+Body:  
+```
 {
     "amount": 5.0,
     "from_id": 2,
     "to_id": 3
 }
+```
